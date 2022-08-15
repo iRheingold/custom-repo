@@ -31,11 +31,14 @@ class EmpleadoController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        //
+//    $datosEmpleado = request()->all();
+        $datosEmpleado = request()->except('_token');
+        Empleado::insert($datosEmpleado);
+        return response()->json($datosEmpleado);
     }
 
     /**
