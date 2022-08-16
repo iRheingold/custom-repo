@@ -23,13 +23,21 @@
             @foreach($empleados as $empleado)
              <tr>
                  <td>{{$empleado->id}}</td>
-        {{--         <td>{{$empleado->foto}}</td>--}}
-                 <td></td>
+                 <td>
+                     <img src="{{ asset('storage').'/'.$empleado->foto }}" alt="">
+                     {{$empleado->foto}}</td>
                  <td>{{$empleado->nombre}}</td>
                  <td>{{$empleado->apellidop}}</td>
                  <td>{{$empleado->apellidom}}</td>
                  <td>{{$empleado->email}}</td>
-                 <td>Editar | Borrar</td>
+                 <td class="d-flex justify-content-center">
+                     <a href="{{url('/empleado/'.$empleado->id.'/edit/')}}" class="btn btn-secondary mx-2">Editar</a>
+                     <form action="{{ url('/empleado/'.$empleado->id)}}" method="post">
+                         @csrf
+                         {{method_field('DELETE')}}
+                         <input type="submit" onclick="return confirm('¿Quieres Eliminar?')" value="Destroy" class="btn btn-danger">
+                     </form>
+                 </td>
              </tr>
             @endforeach
             </tbody>

@@ -1,0 +1,21 @@
+name: custom_repo
+
+services:
+  web1:
+    type: php:7.4
+    via: apache:2.4
+    ssl: true
+    sslExpose: true
+    webroot: ./
+    xdebug: true
+    composer_version: 2
+  database:
+    type: mysql:8.0
+    portforward: 3310
+    creds:
+      user: custom_user
+      password: custom
+proxy:
+  web1:
+    - custom.local
+
