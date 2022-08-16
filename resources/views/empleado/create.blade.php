@@ -1,5 +1,6 @@
+@extends('layouts.app')
+@section('content')
 <h2>Formulario creación de empleado</h2>
-
 <form action="{{url('/empleado')}}" method="post" enctype="multipart/form-data" class="mb-3">
     @csrf
     <label for="nombre" class="form-label">Nombre
@@ -24,3 +25,4 @@
     <br>
     <input type="submit" value="Enviar" class="btn btn-primary">
 </form>
+@endsection
