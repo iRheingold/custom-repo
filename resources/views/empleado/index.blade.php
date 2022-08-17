@@ -23,14 +23,12 @@
             @foreach($empleados as $empleado)
              <tr>
                  <td>{{$empleado->id}}</td>
-                 <td>
-                     <img src="{{ asset('storage').'/'.$empleado->foto }}" alt="">
-                     {{$empleado->foto}}</td>
+                 <td><img src="{{ asset('storage').'/'.$empleado->foto }}" width="70" alt=""></td>
                  <td>{{$empleado->nombre}}</td>
                  <td>{{$empleado->apellidop}}</td>
                  <td>{{$empleado->apellidom}}</td>
                  <td>{{$empleado->email}}</td>
-                 <td class="d-flex justify-content-center">
+                 <td class="d-flex justify-content-center p-4">
                      <a href="{{url('/empleado/'.$empleado->id.'/edit/')}}" class="btn btn-secondary mx-2">Editar</a>
                      <form action="{{ url('/empleado/'.$empleado->id)}}" method="post">
                          @csrf
