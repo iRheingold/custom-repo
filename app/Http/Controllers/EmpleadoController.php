@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empleado;
 use Illuminate\Http\Request;
+use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Storage;
 
 class EmpleadoController extends Controller
@@ -44,6 +45,7 @@ class EmpleadoController extends Controller
         }
         Empleado::insert($datosEmpleado);
 //        return response()->json($datosEmpleado);
+        smilify('success', 'Empleado agregado correctamente');
         return  redirect('empleado');
     }
 
@@ -88,6 +90,7 @@ class EmpleadoController extends Controller
        Empleado::where('id','=',$id)->update($datosEmpleado);
 
        $empleado=Empleado::findOrFail($id);
+        notify()->success('Empleado actualizado correctamente. ⚡️');
         return view('empleado.edit',compact('empleado'));
     }
 
@@ -99,7 +102,13 @@ class EmpleadoController extends Controller
      */
     public function destroy($id)
     {
+        $empleado=Empleado::findOrFail($id);
+
+        if(Storage::delete('public/'.$empleado->foto)){
         Empleado::destroy($id);
+        }
+        smilify('success', 'Empleado eliminado correctamente');
+        notify()->preset('user-deleted');
         return  redirect('empleado');
     }
 }

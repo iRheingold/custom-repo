@@ -9,14 +9,14 @@
 
     <title>{{ config('app.name', 'Empleados') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    @yield('css')
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
+    @yield('css')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @notifyCss
 </head>
 <body>
     <div id="app">
@@ -78,6 +78,10 @@
             @yield('content')
         </main>
     </div>
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}" defer></script>
 @yield('js')
+<x:notify-messages />
+@notifyJs
 </body>
 </html>
