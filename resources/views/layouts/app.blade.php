@@ -14,9 +14,10 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
-    @yield('css')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @notifyCss
+    @yield('css')
+
 </head>
 <body>
     <div id="app">
