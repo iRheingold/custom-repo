@@ -18,8 +18,8 @@
     <label for="foto">Foto</label><br>
     @if(isset($empleado->foto))
     <img src="{{ asset('storage').'/'.$empleado->foto }}" width="100" alt="">
-    @else
-        <input type="file" name="foto" id="foto" value="" class="form-control">
     @endif
+        <input type="file" name="foto" id="foto" value="" class="form-control">
 </div>
 <button type="submit" class="btn btn-primary">Enviar</button>
+<a href="{{ url('empleado/') }}" class="btn btn-primary">Regresar</a>

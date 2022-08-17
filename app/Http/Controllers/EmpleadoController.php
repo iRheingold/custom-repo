@@ -15,7 +15,7 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        $datos['empleados']=Empleado::paginate(10);
+        $datos['empleados']=Empleado::all();
         return view('empleado.index',$datos);
     }
 
@@ -43,7 +43,8 @@ class EmpleadoController extends Controller
             $datosEmpleado['foto']=$request->file('foto')->store('uploads','public');
         }
         Empleado::insert($datosEmpleado);
-        return response()->json($datosEmpleado);
+//        return response()->json($datosEmpleado);
+        return  redirect('empleado');
     }
 
     /**
