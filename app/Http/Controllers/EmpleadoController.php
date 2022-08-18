@@ -99,6 +99,26 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $campos = [
+            'nombre'=>'required|string|max:50',
+            'apellidop'=>'required|string|max:50',
+            'apellidom'=>'required|string|max:50',
+            'email'=>'required|email'
+        ];
+
+        $msg=[
+            'required'=>'El :attribute es requerido.',
+        ];
+        if($request->hasFile('foto')){
+            $campos = [
+                'foto'=>'required|max:10000|mimes:jpeg,png,jpg|size:512'
+            ];
+            $msg=[
+                'foto.required'=>'La imagen es requerida.'
+            ];
+        }
+        $this->validate($request,$campos,$msg);
+
        $datosEmpleado = request()->except(['_token','_method']);
         if($request->hasFile('foto')){
             $empleado=Empleado::findOrFail($id);
@@ -109,7 +129,8 @@ class EmpleadoController extends Controller
 
        $empleado=Empleado::findOrFail($id);
         notify()->success('Empleado actualizado correctamente. ⚡️');
-        return view('empleado.edit',compact('empleado'));
+        return  redirect('empleado');
+        //return view('empleado.edit',compact('empleado'));
     }
 
     /**

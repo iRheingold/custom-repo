@@ -1,6 +1,3 @@
-@section('css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-@endsection
 @if(count($errors)>0)
     @foreach($errors->all() as $error)
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -11,19 +8,19 @@
 @endif
 <div class="mb-3">
     <label for="nombre" class="form-label">Nombre</label>
-    <input  type="text" name="nombre" class="form-control" id="nombre" value="{{isset($empleado->nombre)? $empleado->nombre : ''}}" aria-describedby="emailHelp">
+    <input  type="text" name="nombre" class="form-control" id="nombre" value="{{isset($empleado->nombre)? $empleado->nombre : old('nombre')}}" aria-describedby="emailHelp">
 </div>
 <div class="mb-3">
     <label for="apellidop">Apellido Paterno</label>
-    <input type="text" name="apellidop" id="apellidop" value="{{isset($empleado->apellidop)? $empleado->apellidop : ''}}" class="form-control">
+    <input type="text" name="apellidop" id="apellidop" value="{{isset($empleado->apellidop)? $empleado->apellidop : old('apellidop')}}" class="form-control">
 </div>
 <div class="mb-3">
     <label for="apellidom">Apellido Materno</label>
-    <input type="text" name="apellidom" id="apellidom"  value="{{isset($empleado->apellidom) ? $empleado->apellidom : ''}}" class="form-control">
+    <input type="text" name="apellidom" id="apellidom"  value="{{isset($empleado->apellidom) ? $empleado->apellidom : old('apellidom')}}" class="form-control">
 </div>
 <div class="mb-3">
     <label for="email">Email</label>
-    <input type="email" name="email" id="email" value="{{isset($empleado->email) ? $empleado->email : ''}}" class="form-control">
+    <input type="email" name="email" id="email" value="{{isset($empleado->email) ? $empleado->email : old('email')}}" class="form-control">
 </div>
 <div class="mb-3">
     <label for="foto">Foto</label><br>
