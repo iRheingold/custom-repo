@@ -6,6 +6,7 @@ use App\Models\Empleado;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class EmpleadoController extends Controller
 {
@@ -33,12 +34,29 @@ class EmpleadoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
-//    $datosEmpleado = request()->all();
+//         * Validaciones
+        $campos = [
+            'nombre'=>'required|string|max:50',
+            'apellidop'=>'required|string|max:50',
+            'apellidom'=>'required|string|max:50',
+            'email'=>'required|email',
+            'foto'=>'required|max:10000|mimes:jpeg,png,jpg|size:512'
+        ];
+
+        $msg=[
+            'required'=>'El :attribute es requerido.',
+            'foto.required'=>'La imagen es requerida.'
+        ];
+
+        $this->validate($request,$campos,$msg);
+
+
         $datosEmpleado = request()->except('_token');
         if($request->hasFile('foto')){
             $datosEmpleado['foto']=$request->file('foto')->store('uploads','public');
@@ -107,7 +125,6 @@ class EmpleadoController extends Controller
         if(Storage::delete('public/'.$empleado->foto)){
         Empleado::destroy($id);
         }
-        smilify('success', 'Empleado eliminado correctamente');
         notify()->preset('user-deleted');
         return  redirect('empleado');
     }

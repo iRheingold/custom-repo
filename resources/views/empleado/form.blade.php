@@ -1,3 +1,14 @@
+@section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+@endsection
+@if(count($errors)>0)
+    @foreach($errors->all() as $error)
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error!</strong> {{$error}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endforeach
+@endif
 <div class="mb-3">
     <label for="nombre" class="form-label">Nombre</label>
     <input  type="text" name="nombre" class="form-control" id="nombre" value="{{isset($empleado->nombre)? $empleado->nombre : ''}}" aria-describedby="emailHelp">
@@ -22,4 +33,4 @@
         <input type="file" name="foto" id="foto" value="" class="form-control">
 </div>
 <button type="submit" class="btn btn-primary">Enviar</button>
-<a href="{{ url('empleado/') }}" class="btn btn-primary">Regresar</a>
+<a href="{{ url('empleado/') }}" class="btn btn-success">Regresar</a>
