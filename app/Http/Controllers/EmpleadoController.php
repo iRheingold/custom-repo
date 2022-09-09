@@ -46,7 +46,7 @@ class EmpleadoController extends Controller
             'apellidop'=>'required|string|max:50',
             'apellidom'=>'required|string|max:50',
             'email'=>'required|email',
-            'foto'=>'required|max:10000|mimes:jpeg,png,jpg|between:10,512'
+            'foto'=>'required|max:10000|mimes:jpeg,png,jpg|between:1,512'
         ];
 
         $msg=[
@@ -111,7 +111,7 @@ class EmpleadoController extends Controller
         ];
         if($request->hasFile('foto')){
             $campos = [
-                'foto'=>'required|max:10000|mimes:jpeg,png,jpg|between:10,512'
+                'foto'=>'required|max:10000|mimes:jpeg,png,jpg|between:1,512'
             ];
             $msg=[
                 'foto.required'=>'La imagen es requerida.'
