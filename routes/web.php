@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepartamentoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
@@ -18,10 +19,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/hello', function (){
-//   return response( 'Hello world',200)
-//       ->header('Content-Type', 'text/plain');
-    return redirect('/world');
+Route::get('/welcome', function (){
+    return view('welcome');
 });
 
 Route::get('/world', function (){
@@ -33,8 +32,14 @@ Route::get('/world', function (){
 Route::resource('empleado',EmpleadoController::class)->middleware('auth');
 Auth::routes(['register'=>true,'reset'=>false]); // para que desaparesca registro y recuperacion del login
 
-Route::get('/home', [EmpleadoController::class, 'index'])->name('home');
+//Route::get('/home', [EmpleadoController::class, 'index'])->name('home');
 
 Route::group(['middleware'=> 'auth'], function(){
-   Route::get('/',[EmpleadoController::class,'index'])->name('home');
+    Route::controller(EmpleadoController::class)->prefix('empleado')->group(function () {
+        Route::get('', 'index')->name('empleado_index');
+    });
+
+    Route::controller(DepartamentoController::class)->prefix('departamento')->group(function () {
+        Route::get('', 'departamentoIndex')->name('departamento_index');
+    });
 });
