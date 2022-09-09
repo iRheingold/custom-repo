@@ -16,7 +16,28 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @notifyCss
-    @yield('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <style>
+        .active{
+            background:
+                linear-gradient(
+                    to right,
+                    rgba(100, 200, 200, 1),
+                    rgba(100, 200, 200, 1)
+                ),
+                linear-gradient(
+                    to right,
+                    rgba(255, 0, 0, 1),
+                    rgba(255, 0, 180, 1),
+                    rgba(0, 100, 200, 1)
+                );
+        background-size: 100% 3px, 0 3px;
+        background-position: 100% 100%, 0 100%;
+        background-repeat: no-repeat;
+        transition: background-size 400ms;
+        }
+    </style>
 
 </head>
 <body>
@@ -24,13 +45,13 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/welcome') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{__('Home')}}
                 </a>
-                <a class="navbar-brand" href="{{ route('empleado_index') }}">
+                <a class="navbar-brand {{ (request()->routeIs('empleado_index')== 'empleado_index') ? 'active' : '' }}" href="{{ route('empleado_index') }}">
                     {{__('Empleados')}}
                 </a>
-                <a class="navbar-brand" href="{{ route('departamento_index') }}">
-                    Departamento
+                <a class="navbar-brand {{ (request()->routeIs('departamento_index')== 'departamento_index') ? 'active' : '' }}" href="{{ route('departamento_index') }}">
+                    {{__('Departamento')}}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -87,6 +108,9 @@
     </div>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 @yield('js')
 <x:notify-messages />
 @notifyJs
